@@ -1,6 +1,6 @@
-# Your name: 
-# Your student id:
-# Your email:
+# Your name: Henry Collins-Thompson
+# Your student id: 0874 7961
+# Your email: henryct@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT):
 # If you worked with generative AI also add a statement for how you used it.  
 # e.g.: 
@@ -16,7 +16,7 @@ class DigitalBookofAnswers():
     # RETURNS: None
     def __init__(self, answers):
 
-        pass
+        self.answers = answers
 
 
     # Create the __str__ method
@@ -25,7 +25,7 @@ class DigitalBookofAnswers():
     # RETURNS: a string
     def __str__(self):
 
-        pass
+        
 
     # Creates the check_get_answer method
     # ARGUMENTS:
