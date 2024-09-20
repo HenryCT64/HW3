@@ -6,6 +6,7 @@
 # e.g.: 
 # Asked Chatgpt hints for debugging and suggesting the general sturcture of the code
 
+import random
 # create a Digital Book of Answers
 class DigitalBookofAnswers():
 
@@ -16,8 +17,9 @@ class DigitalBookofAnswers():
     # RETURNS: None
     def __init__(self, answers):
 
-        self.answers = answers
-
+        self.book_answer_list = answers
+        self.questions_asked_list = []
+        self.answered_list = []
 
     # Create the __str__ method
     # ARGUMENTS: 
@@ -34,16 +36,23 @@ class DigitalBookofAnswers():
     # RETURNS: a string
     def check_get_answer(self, question):
 
-        pass
-
+        if question in answered_list:
+            return f"I've already answered this question. The answer is: {}"
+        else:
+            rand_num = random.randrange(len(self.book_answer_list))
+            questions_asked_list.append(question)
+            answered_list.append(rand_num)
     # Creates open_book method
     # ARGUMENTS:
     #   self: the current object
     # RETURNS: None
     def open_book(self):
-
-        pass
-
+        
+        while True:
+            self.question = f"Turn {1+len(questions_asked_list)} - Please enter your question: "
+            if (self.question == "Done"):
+                print("Goodbye! See you soon.")
+                pass
 
     # Create the answer_log method
     # ARGUMENTS: 
