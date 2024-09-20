@@ -27,7 +27,7 @@ class DigitalBookofAnswers():
     # RETURNS: a string
     def __str__(self):
 
-        
+        return "-".join(self.answered_list)
 
     # Creates the check_get_answer method
     # ARGUMENTS:
@@ -36,12 +36,13 @@ class DigitalBookofAnswers():
     # RETURNS: a string
     def check_get_answer(self, question):
 
-        if question in answered_list:
-            return f"I've already answered this question. The answer is: {}"
+        if question in self.questions_asked_list:
+            return f"I've already answered this question. The answer is: {book_answer_list[questions_asked_list.index(question)]}"
         else:
-            rand_num = random.randrange(len(self.book_answer_list))
-            questions_asked_list.append(question)
-            answered_list.append(rand_num)
+            rand_num = random.randrange(len(self.book_answer_list) - 1)
+            self.questions_asked_list.append(question)
+            self.answered_list.append(rand_num)
+            return str(self.book_answer_list[rand_num])
     # Creates open_book method
     # ARGUMENTS:
     #   self: the current object
@@ -49,19 +50,21 @@ class DigitalBookofAnswers():
     def open_book(self):
         
         while True:
-            self.question = f"Turn {1+len(questions_asked_list)} - Please enter your question: "
-            if (self.question == "Done"):
+            question = f"Turn {1+len(self.questions_asked_list)} - Please enter your question: "
+            if (question == "Done"):
                 print("Goodbye! See you soon.")
                 pass
+            check_get_answer(question)
 
     # Create the answer_log method
     # ARGUMENTS: 
     #       self: the curent object
     # RETURNS: a list
     def answer_log(self):
-
-        pass
-
+        nuList = []
+        for i in range(len(self.book_answer_list)):
+            nuList.append(f"{self.answered_list.count(i)} - {book_answer_list[i]}")
+        return nuList
 
 def test():
     answers_list = ['Believe in Yourself', 'Stay Open to the Future', 'Enjoy It']
