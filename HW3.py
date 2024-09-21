@@ -26,8 +26,7 @@ class DigitalBookofAnswers():
     #       self: the curent object
     # RETURNS: a string
     def __str__(self):
-
-        return "-".join(self.answered_list)
+        return (" - ".join(self.book_answer_list))
 
     # Creates the check_get_answer method
     # ARGUMENTS:
@@ -37,33 +36,40 @@ class DigitalBookofAnswers():
     def check_get_answer(self, question):
 
         if question in self.questions_asked_list:
-            return f"I've already answered this question. The answer is: {book_answer_list[questions_asked_list.index(question)]}"
+            return f"I've already answered this question. The answer is: {self.book_answer_list[self.answered_list[self.questions_asked_list.index(question)]]}"
         else:
-            rand_num = random.randrange(len(self.book_answer_list) - 1)
+            self.rand_num = random.randrange(len(self.book_answer_list))
             self.questions_asked_list.append(question)
-            self.answered_list.append(rand_num)
-            return str(self.book_answer_list[rand_num])
+            self.answered_list.append(self.rand_num)
+            return str(self.book_answer_list[self.rand_num])
     # Creates open_book method
     # ARGUMENTS:
     #   self: the current object
     # RETURNS: None
     def open_book(self):
-        
-        while True:
-            question = f"Turn {1+len(self.questions_asked_list)} - Please enter your question: "
+        temp_val = 1
+        while temp_val:
+            question = input(f"Turn {1+len(self.questions_asked_list)} - Please enter your question: ")
             if (question == "Done"):
                 print("Goodbye! See you soon.")
-                pass
-            check_get_answer(question)
+                temp_val = 0
+            else: print(self.check_get_answer(question))
 
     # Create the answer_log method
     # ARGUMENTS: 
     #       self: the curent object
     # RETURNS: a list
     def answer_log(self):
+        unique_list = []
+        count_list = []
+        for j in self.answered_list:
+            if j not in unique_list:
+                unique_list.append(j)
+                count_list.append(self.answered_list.count(j))
         nuList = []
-        for i in range(len(self.book_answer_list)):
-            nuList.append(f"{self.answered_list.count(i)} - {book_answer_list[i]}")
+        for i in reversed(list(set(count_list))):
+            nuList.append(f"{i} - {self.book_answer_list[unique_list[count_list.index(i)]].lower()}")
+
         return nuList
 
 def test():
@@ -156,18 +162,32 @@ def test():
 def my_test():
     # Put your test code here
 
-    pass
+    answer_list = ["Follow Your Inner Voice", "Stay Positive", "Go For It", "Believe in Yourself", "Stay Open to the Future", "Enjoy It"]
+    book = DigitalBookofAnswers([])
+    
+    print("Testing empty __str__")
+    print(f"Expected: , Actual: {str(book)}")
 
+    book.book_answer_list = (answer_list)
+    print("Testing check_get_answer")
+    book.check_get_answer("Yo")
+    print(f"Expected: I've already answered this question. The answer is: {book.book_answer_list[book.answered_list[-1]]}, result: {book.check_get_answer("Yo")}")
+    
+    print(f"Expected: ['1 - {book.book_answer_list[book.answered_list[-1]].lower()}'], actual: {book.answer_log()}")
+    pass    
 
 def main():
     
-    pass
-
+    answer_list = ["Follow Your Inner Voice", "Stay Positive", "Go For It", "Believe in Yourself", "Stay Open to the Future", "Enjoy It"]
+    book = DigitalBookofAnswers(answer_list)
+    book.open_book()
+    print(book.answer_log())
+    pass    
 
 
 # Only run the main function if this file is being run (not imported)
 if __name__ == "__main__":
-    #main()
+    main()
     test() 
-    # my_test() #TODO: Uncomment if you do the extra credit
+    my_test() #TODO: Uncomment if you do the extra credit
     
